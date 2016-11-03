@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use SebastianBergmann\CodeCoverage\RuntimeException;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -78,6 +79,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
+
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -108,6 +110,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
+
         return $this->render('contact', [
             'model' => $model,
         ]);
