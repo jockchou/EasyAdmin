@@ -36,11 +36,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['email', 'password'], 'required'],
-            [['create_at', 'update_at'], 'safe'],
             [['email', 'password', 'username'], 'string', 'max' => 100],
             [['avatar'], 'string', 'max' => 255],
             [['auth_key', 'access_token'], 'string', 'max' => 32],
-            [['email'], 'unique'],
+            [['email'], 'unique', 'message' => '{attribute}"{value}"已经注册。'],
         ];
     }
 
@@ -51,14 +50,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'email' => 'Email',
-            'password' => 'Password',
-            'username' => 'Username',
-            'avatar' => 'Avatar',
+            'email' => '邮箱',
+            'password' => '密码',
+            'username' => '用户名',
+            'avatar' => '头像',
             'auth_key' => 'AuthKey',
             'access_token' => 'AccessToken',
-            'create_at' => 'CreateAt',
-            'update_at' => 'UpdateAt',
+            'create_at' => '创建时间',
+            'update_at' => '更新时间',
         ];
     }
 
@@ -131,7 +130,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
-                $this->auth_key = \Yii::$app->security->generateRandomKey(32);
+                $this->auth_key = \Yii::$app->security->generateRandomString();
             }
 
             return true;
@@ -149,5 +148,4 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return \Yii::$app->security->validatePassword($password, $this->password);
     }
-
 }

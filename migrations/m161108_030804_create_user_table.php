@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 
@@ -22,11 +21,12 @@ class m161108_030804_create_user_table extends Migration
             'avatar' => $this->string(),
             'auth_key' => $this->char(32),
             'access_token' => $this->char(32),
-            'create_at' => $this->timestamp(),
-            'update_at' => $this->timestamp()
+            'create_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'update_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
 
         $this->createIndex('idx-user-access_token', 'user', 'access_token');
+        $this->createIndex('idx-user-username', 'user', 'username');
 
     }
 

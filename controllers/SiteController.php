@@ -133,8 +133,10 @@ class SiteController extends Controller
         }
 
         $model = new RegisterForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post()) && $model->saveUser()) {
+            Yii::$app->user->login($model->getUser(), 3600 * 24 * 7);
+
+            return $this->goHome();
         }
 
         return $this->render('register', [

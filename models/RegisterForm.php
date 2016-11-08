@@ -21,38 +21,17 @@ class RegisterForm extends Model
 
     private $_user = false;
 
-
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
-            // username and password are both required
             [['username', 'email', 'password', 'retypePassword'], 'required'],
             ['email', 'email'],
-            // rememberMe must be a boolean value
-            ['agreeTerms', 'boolean'],
-            ['password', 'validatePassword']
+            ['agreeTerms', 'compare', 'compareValue' => '1', 'operator' => '==', 'message' => '必须同意注册协议。'],
+            ['password', 'compare', 'compareAttribute' => 'retypePassword']
         ];
-    }
-
-    public function validatePassword($attribute, $params)
-    {
-        if (!$this->hasErrors()) {
-            if ($this->password !== $this->retypePassword) {
-                $this->addError($attribute, '两次密码不一致.');
-            }
-        }
-    }
-
-    public function getUser()
-    {
-        if ($this->_user === false) {
-            $this->_user = User::findByEmail($this->email);
-        }
-
-        return $this->_user;
     }
 
     public function attributeLabels()
@@ -66,4 +45,27 @@ class RegisterForm extends Model
         ];
     }
 
+    public function getUser()
+    {
+        if ($this->_user === false) {
+            $user = new User();
+            $user->attributes = $this->attributes;
+            $user->password = Yii::$app->security->generatePasswordHash($user->password);
+            $this->_user = $user;
+        }
+
+        return $this->_user;
+    }
+
+    public function saveUser()
+    {
+        $user = $this->getUser();
+        if (!$user->save()) {
+            $this->addErrors($user->getErrors());
+
+            return false;
+        }
+
+        return $user;
+    }
 }

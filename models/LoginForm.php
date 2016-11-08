@@ -26,12 +26,9 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
             [['email', 'password'], 'required'],
             ['email', 'email'],
-            // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
     }
@@ -49,7 +46,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, '错误的用户名或密码.');
+                $this->addError($attribute, '用户名或密码错误。');
             }
         }
     }
@@ -84,15 +81,8 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
             'email' => '邮箱',
             'password' => '密码',
-            'username' => '用戶名',
-            'avatar' => '头像',
-            'auth_key' => 'AuthKey',
-            'access_token' => 'AccessToken',
-            'create_at' => '创建时间',
-            'update_at' => '更新时间',
             'rememberMe' => '记住我'
         ];
     }

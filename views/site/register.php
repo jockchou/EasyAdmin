@@ -63,7 +63,7 @@ $fieldOptions3 = [
             </div>
             <!-- /.col -->
             <div class="col-xs-4">
-                <?= Html::submitButton('注册', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'register-button']) ?>
+                <?= Html::submitButton('注册', ['class' => 'btn btn-primary btn-block btn-flat']) ?>
             </div>
             <!-- /.col -->
         </div>
