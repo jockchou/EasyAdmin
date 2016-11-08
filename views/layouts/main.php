@@ -15,13 +15,7 @@ if (Yii::$app->controller->id === 'site' && (in_array(Yii::$app->controller->act
     );
 } else {
 
-    if (class_exists('backend\assets\AppAsset')) {
-        backend\assets\AppAsset::register($this);
-    } else {
-        app\assets\AppAsset::register($this);
-    }
-
-    app\assets\AdminLteAsset::register($this);
+    app\assets\AppAsset::register($this);
 
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
     ?>

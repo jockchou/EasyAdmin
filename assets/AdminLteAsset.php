@@ -19,6 +19,7 @@ class AdminLteAsset extends BaseAdminLteAsset
     ];
     public $depends = [
         'rmrevin\yii\fontawesome\AssetBundle',
+        'rmrevin\yii\ionicon\AssetBundle',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
