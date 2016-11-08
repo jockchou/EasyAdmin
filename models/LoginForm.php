@@ -13,7 +13,7 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-    public $username;
+    public $email;
     public $password;
     public $rememberMe = true;
 
@@ -27,7 +27,8 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['email', 'password'], 'required'],
+            ['email', 'email'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -48,7 +49,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, '错误的用户名或密码.');
             }
         }
     }
@@ -60,8 +61,9 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 7 : 0);
         }
+
         return false;
     }
 
@@ -73,9 +75,26 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findByEmail($this->email);
         }
 
         return $this->_user;
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'email' => '邮箱',
+            'password' => '密码',
+            'username' => '用戶名',
+            'avatar' => '头像',
+            'auth_key' => 'AuthKey',
+            'access_token' => 'AccessToken',
+            'create_at' => '创建时间',
+            'update_at' => '更新时间',
+            'rememberMe' => '记住我'
+        ];
+    }
+
 }

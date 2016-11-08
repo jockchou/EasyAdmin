@@ -3,7 +3,9 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'EasyAdmin',
+    'id' => 'easyAdmin',
+    'name' => 'Easy Admin',
+    'language' => 'zh-CN',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
@@ -44,20 +46,20 @@ $config = [
             'rules' => [
             ],
         ],
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
-                ],
-            ],
-        ],
         'assetManager' => [
             'bundles' => [
-                'dmstr\web\AdminLteAsset' => [
+                'app\assets\AdminLteAsset' => [
                     'skin' => 'skin-green',
                 ],
             ],
         ],
+    ],
+    'as loginCheck' => [
+        'class' => 'app\filters\LoginCheckFilter',
+        'except' => [
+            'site/login',
+            'site/register'
+        ]
     ],
     'params' => $params,
 ];
