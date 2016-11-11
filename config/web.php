@@ -53,6 +53,9 @@ $config = [
                 ],
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager'
+        ]
     ],
     'as loginCheck' => [
         'class' => 'app\filters\LoginCheckFilter',
