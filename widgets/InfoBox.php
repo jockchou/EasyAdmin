@@ -9,10 +9,8 @@
 
 namespace app\widgets;
 
-
 use yii\bootstrap\BootstrapAsset;
 use yii\bootstrap\Html;
-use yii\bootstrap\Widget;
 
 class InfoBox extends Widget
 {

@@ -9,13 +9,21 @@
 
 namespace app\controllers;
 
-
+use Yii;
+use app\models\LoginForm;
 use yii\web\Controller;
 
 class ViewController extends Controller
 {
     public function actionWidget()
     {
-        return $this->render("widget");
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        return $this->render('widget', [
+            'model' => $model,
+        ]);
     }
 }
