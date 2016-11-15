@@ -32,6 +32,8 @@ class Box extends Widget
 
     public $style = self::STYLE_DEFAULT;
 
+    public $solid = false;
+
     public function init()
     {
         parent::init();
@@ -40,11 +42,13 @@ class Box extends Widget
         if (!empty($this->style)) {
             Html::addCssClass($this->options, $this->style);
         }
+        if ($this->solid) {
+            Html::addCssClass($this->options, 'box-solid');
+        }
 
         echo Html::beginTag('div', $this->options) . "\n";
         echo $this->renderHeader() . "\n";
         echo $this->renderBodyBegin() . "\n";
-
     }
 
 
@@ -110,6 +114,4 @@ class Box extends Widget
         echo "\n" . $this->renderFooter();
         echo "\n" . Html::endTag('div');
     }
-
-
 }
