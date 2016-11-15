@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\widgets\Box;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
@@ -24,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+    <?php Box::begin(); ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -33,9 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'rule_name',
             'data:ntext',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
+    <?php Box::end(); ?>
 
 </div>
