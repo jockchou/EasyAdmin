@@ -5,32 +5,30 @@ use yii\widgets\DetailView;
 use app\widgets\Box;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Role */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Roles'), 'url' => ['index']];
+$this->title = '查看角色';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '角色管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->name], [
+        <?= Html::a(Yii::t('app', '更新'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', '删除'), ['delete', 'id' => $model->name], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('app', '你确定要删除这个角色?'),
                 'method' => 'post',
             ],
         ]) ?>
     </p>
-    <?php Box::begin(); ?>
+    <?php Box::begin([
+        'footer' => false,
+        'headerOptions' => ['title' => '角色信息']
+    ]); ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'name',
-            'type',
             'description:ntext',
             'rule_name',
             'data:ntext',

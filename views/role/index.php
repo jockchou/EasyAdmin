@@ -6,39 +6,38 @@ use yii\widgets\Pjax;
 use app\widgets\Box;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\RoleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Roles');
+$this->title = Yii::t('app', '角色管理');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
-        <?= Html::a(Yii::t('app', 'Create Role'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', '新建'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php Box::begin(); ?>
-        <?php Pjax::begin(); ?>
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                //'filterModel' => $searchModel,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
 
-                    'name',
-                    'type',
-                    'description:ntext',
-                    'rule_name',
-                    'data:ntext',
-                    // 'created_at',
-                    // 'updated_at',
-
-                    ['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?>
-        <?php Pjax::end(); ?>
+    <?php Box::begin([
+        'footer' => false,
+        'headerOptions' => ['title' => '角色列表']
+    ]); ?>
+    <?php Pjax::begin(); ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'summary' => false,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'name',
+            'description:ntext',
+            'rule_name',
+            'data:ntext',
+            'created_at:datetime',
+            'updated_at:datetime',
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'tableOptions' => ['class' => 'table table-bordered table-hover dataTable', ['rolie']],
+        'pager' => ['options' => ['class' => 'pagination pagination-sm no-margin pull-right']]
+    ]); ?>
+    <?php Pjax::end(); ?>
     <?php Box::end(); ?>
 </div>

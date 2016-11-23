@@ -55,6 +55,12 @@ $config = [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager'
+        ],
+        'formatter' => [
+            'timeZone' => 'Asia/Shanghai',
+            'dateFormat' => 'yyyy-MM-dd',
+            'timeFormat' => 'HH:mm:ss',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss'
         ]
     ],
     'as loginCheck' => [

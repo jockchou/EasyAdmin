@@ -28,6 +28,8 @@ class Box extends Widget
     public $footer;
     public $footerOptions;
 
+    public $bodyOptions = [];
+
     public $tools = false;
 
     public $style = self::STYLE_DEFAULT;
@@ -69,7 +71,9 @@ class Box extends Widget
 
     protected function renderBodyBegin()
     {
-        return Html::beginTag('div', ['class' => 'box-body']);
+        Html::addCssClass($this->bodyOptions, 'box-body');
+
+        return Html::beginTag('div', $this->bodyOptions);
     }
 
     protected function renderBodyEnd()
