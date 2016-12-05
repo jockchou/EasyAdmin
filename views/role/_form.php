@@ -12,22 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput()->error() ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'rule_name')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '创建') : Yii::t('app', '更新'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

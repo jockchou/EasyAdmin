@@ -14,17 +14,6 @@ class RoleSearch extends Role
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            [['name', 'description', 'rule_name', 'data'], 'safe'],
-            [['type', 'created_at', 'updated_at'], 'integer'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
@@ -47,7 +36,7 @@ class RoleSearch extends Role
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 2
+                'pageSize' => 10
             ],
             'sort' => [
                 'attributes' => [

@@ -9,7 +9,7 @@ $this->title = Yii::t('app', '更新角色');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '角色管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Yii::t('app', '更新角色');
 ?>
-<div class="row role-update">
+<div class="role-update">
     <div class="col-md-6">
         <?php Box::begin([
             'footer' => false,

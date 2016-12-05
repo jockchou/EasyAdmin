@@ -25,8 +25,6 @@ use yii\db\ActiveRecord;
  */
 class Role extends ActiveRecord
 {
-    public $type = 1;
-
     public static function tableName()
     {
         return "auth_item";
@@ -42,6 +40,19 @@ class Role extends ActiveRecord
             'data' => 'Data',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['name', 'description'], 'required'],
+            [['name', 'rule_name'], 'string', 'max' => 64],
+            [['created_at', 'updated_at'], 'default', 'value' => time()],
+            [['type'], 'default', 'value' => 1]
         ];
     }
 
